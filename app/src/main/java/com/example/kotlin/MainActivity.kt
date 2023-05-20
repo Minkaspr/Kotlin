@@ -12,8 +12,13 @@ class MainActivity : AppCompatActivity() {
 
         // tiposDeDatos()
 
-        sentenciaIf()
+        // sentenciaIf()
 
+        // sentenciaWhen()
+
+        // arrays()
+
+        // maps()
     }
 
     // Comentario en Linea
@@ -257,6 +262,184 @@ class MainActivity : AppCompatActivity() {
         } else {
             println("$myNumber2 es mayor a 10 o menor o igual a 5 y no es igual a 53")
         }
+    }
+
+    private fun sentenciaWhen(){
+
+        /**
+         *  7mo - SENTENCIA WHEN
+         */
+
+        // When con String
+        val country = "Peru"
+
+        when (country) {
+            /*
+            "Peru" -> {
+                println("El idioma es Español")
+            } "Argentina" -> {
+                println("El idioma es Español")
+            } "Bolivia" -> {
+                println("El idioma es Español")
+            } "Chile" -> {
+                println("El idioma es Español")
+            } "EEUU" -> {
+                println("El idioma es Ingles")
+            } "Francia" -> {
+                println("El idioma es Frances")
+            } else -> {
+                // Se ejecuta este bloque si no se cumple con ninguna de las condiciones
+                println("No conocemos el idioma")
+            }
+             */
+
+            // Optimizamos el When
+
+            "Peru", "Argentina", "Bolivia", "Chile" -> {
+                println("El idioma es Español") // -> El idioma es Español
+            } "EEUU" -> {
+                println("El idioma es Ingles")
+            } "Francia" -> {
+                println("El idioma es Frances")
+            } else -> {
+                println("No conocemos el idioma")
+            }
+        }
+
+        // When con Int
+        val age = 10
+        when (age) {
+            0, 1, 2 -> {
+                println("Eres un bebé")
+            } in 3..10 ->{ // in 3..10 es un rango entre 3 y 10 y se consideran ambos
+                println("Eres un niño") // -> Eres un niño
+            } in 11..17 ->{
+                println("Eres un adolescente")
+            } in 18..69 -> {
+                println("Eres un adulto")
+            } in 70..99 -> {
+                println("Eres un anciano")
+            } else -> {
+                println("🤔")
+            }
+        }
+
+
+    }
+
+    private fun arrays() {
+
+        /**
+         *  8vo - ARRAY
+         *
+         *  A un array, solo se le puede añadir valores del mismo tipo definido
+         *  Es de una estructura ordenada
+         */
+
+        val name = "Min"
+        val surname = "Kasper"
+        val age = "24"
+
+        // Creacion de un array
+        val myArray = arrayListOf<String>()
+
+        // Añadir datos de uno en uno
+        myArray.add(name)
+        myArray.add(surname)
+        myArray.add(age)
+        myArray.add(age) // Permite añadir elementos repetidos
+
+        println(myArray) // -> [Min, Kasper, 24, 24]
+
+        // Añadir un conjunto de datos
+        myArray.addAll(listOf("Hola", "¿Como estas?"))
+
+        println(myArray) // -> [Min, Kasper, 24, 24, Hola, ¿Como estas?]
+
+        // Acceso a datos
+        val myElement = myArray[0]
+        println(myElement) // -> Min
+
+        // Modificacion de datos
+        myArray[5] = "¿Que haces?"
+        println(myArray) // -> [Min, Kasper, 24, 24, Hola, ¿Que haces?]
+
+        // Eliminar datos
+        myArray.removeAt(3)
+        println(myArray) // -> [Min, Kasper, 24, Hola, ¿Que haces?]
+
+        // Recorrer datos
+        myArray.forEach {
+            println(it)
+            /*
+            * -> Min
+            *   Kasper
+            *   24
+            *   Hola
+            *   ¿Que haces?
+            * */
+        }
+
+        // Otras operaciones
+
+        println(myArray.first())
+        // -> Min
+        // Acceder al 1er elemento
+
+        println(myArray.last())
+        // -> ¿Que haces?
+        // Acceder al ultimo elemento
+
+        println(myArray.count())
+        // -> 5
+        // Nos muestra la cantidad de elementos de un array
+
+        myArray.clear()
+        // Se eliminan todos los elementos de un array
+
+        println(myArray.count())
+        // -> 0
+    }
+
+    private fun maps() {
+
+        /**
+         *  9no - MAP - DICCIONARIOS
+         *
+         * Los mapas tienen una clave y valor, las claves son unicas
+         * solo aparecen una vez en el mapa, pero los valores pueden repetirse
+         */
+
+        // Mapa con Tipo de clave (String) y tipo de Valor (Int)
+        var myMap: Map<String, Int> = mapOf()
+        println(myMap) // -> {}
+
+        // Añadir elementos
+        myMap = mapOf("Min" to 1,"Kasper" to 2, "Dario" to 9) // clave: Min y valor: 1
+        println(myMap) // -> {Min = 1, Kasper = 2, Dario = 9}
+        // El mapOf en realidad elimina los datos anteriores y los crea
+
+
+        // Para añadir un solo valor, primero debemos hacer mutable el mapOf
+        var myMap2: Map<String, Int> = mapOf()
+        myMap2 = mutableMapOf("Lunes" to 1, "Martes" to 2, "Viernes" to 5)
+
+        // Añadimos un solo valor
+        myMap2["Sabado"] = 6
+        myMap2.put("Domingo",7)
+        println(myMap2) // -> {Lunes = 1, Martes = 2, Viernes = 5, Sabado = 6, Domingo = 7}
+
+        // Actualizar el valor
+        myMap2.put("Lunes",3)
+        myMap2["Domingo"] = 3
+        println(myMap2) // -> {Lunes = 3, Martes = 2, Viernes = 5, Sabado = 6, Domingo = 3}
+
+        // Acceso a un dato
+        println(myMap2["Lunes"]) // ->  3
+
+        // Eliminar un dato
+        myMap2.remove("Lunes")
+        println(myMap2) // -> {Martes = 2, Viernes = 5, Sabado = 6, Domingo = 3}
     }
 
 }
