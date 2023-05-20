@@ -19,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         // arrays()
 
         // maps()
+
+        // loops()
+
+        nullSafety()
     }
 
     // Comentario en Linea
@@ -36,7 +40,7 @@ class MainActivity : AppCompatActivity() {
      */
 
 
-    private fun variablesYConstantes(){
+    private fun variablesYConstantes() {
 
         /**
          * 1RO - VARIABLES
@@ -157,7 +161,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun sentenciaIf(){
+    private fun sentenciaIf() {
 
         /**
          *  4to - SENTENCIA If
@@ -264,7 +268,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun sentenciaWhen(){
+
+    private fun sentenciaWhen() {
 
         /**
          *  7mo - SENTENCIA WHEN
@@ -326,6 +331,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 
     private fun arrays() {
 
@@ -401,6 +407,7 @@ class MainActivity : AppCompatActivity() {
         // -> 0
     }
 
+
     private fun maps() {
 
         /**
@@ -442,4 +449,157 @@ class MainActivity : AppCompatActivity() {
         println(myMap2) // -> {Martes = 2, Viernes = 5, Sabado = 6, Domingo = 3}
     }
 
+
+    private fun loops() {
+
+        /**
+         * 10mo - BUCLES
+         */
+
+        val myArray = listOf("A","B","C","D")
+        val myMap = mutableMapOf("Lunes" to 1, "Martes" to 2, "Viernes" to 5)
+
+        /*
+         For
+         Se va a ejecutar tantas veces como elementos tenga
+        */
+
+        for (myString in myArray) {
+            println(myString)
+            /*
+            * -> A
+            *   B
+            *   C
+            *   D
+            * */
+        }
+
+        for (myElement in myMap){
+            println("${myElement.key} - ${myElement.value}")
+            /*
+            * -> Lunes - 1
+            *   Martes - 2
+            *   Viernes - 5
+            * */
+        }
+
+        // Recorrer rangos contanto desde el 1ro y ultimo
+        for (x in 0..4){
+            println(x)
+            /*
+            * -> 0
+            *   1
+            *   2
+            *   3
+            *   4
+            * */
+        }
+
+        // Recorrer rango desde el 1ro sin contar el ultimo
+        for (x in 0 until 4){
+            println(x)
+            /*
+            * -> 0
+            *   1
+            *   2
+            *   3
+            * */
+        }
+
+        // Recorrer con incremento de 2 en 2
+        for (x in 0..4 step 2){
+            println(x)
+            /*
+            * -> 0
+            *   2
+            *   4
+            * */
+        }
+
+        // Recorrer de manera regresiva
+        for (x in 6 downTo 0 step 3){
+            println(x)
+            /*
+            * -> 6
+            *   3
+            *   0
+            * */
+        }
+
+        // Llenar un array con un rango
+        val myNumericArray = (0..4)
+        for (myNum in myNumericArray){
+            println(myNum)
+            /*
+            * -> 0
+            *   1
+            *   2
+            *   3
+            *   4
+            * */
+        }
+
+        /*
+         While
+        */
+
+        var x = 0
+
+        while (x < 4){
+            println(x)
+            x++ // x=x+1  o  x+=1
+
+            /*
+            * -> 0
+            *   1
+            *   2
+            *   3
+            * */
+        }
+    }
+
+
+    private fun nullSafety() {
+
+        /**
+         * 11vo - NULL SAFETY
+         *
+         * Seguridad contra nulos
+         */
+
+        var myString = "MinKa"
+        println(myString) // -> MinKa
+        // myString = null // -> ERROR
+
+        // Declaramos una variable null safety
+        var mySafetyString: String? = "Minka null safety"
+        mySafetyString = null
+        println(mySafetyString) // -> null
+
+        mySafetyString = "Hola"
+        println(mySafetyString) // -> Hola
+
+        // Asegurarnos que la variable no sea nula
+        if (mySafetyString != null) {
+            println(mySafetyString!!)
+        // <- al incorporar !! obligamos a que no sea nulo pero solo cuando verifiquemos que no sea nula->
+        }
+
+        mySafetyString = null
+        // Llamada segura - Safe call
+        println(mySafetyString?.length) // ->
+        //<-la variable es nula pero al incorporar '?', verifica primero si es o no nula
+        // , en caso lo fuera, no lo ejecuta->
+
+        mySafetyString = "Ya no soy nulo"
+        println(mySafetyString?.length) // -> 15
+
+        //Otra forma elegante de verificar
+        mySafetyString?.let {
+            println(it) // -> Ya no soy nulo
+        } ?: kotlin.run {
+            // <- Se ejecuta cuando es nulo ->
+            println(mySafetyString)
+        }
+    }
 }
