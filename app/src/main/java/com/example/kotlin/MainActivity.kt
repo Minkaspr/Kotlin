@@ -26,7 +26,13 @@ class MainActivity : AppCompatActivity() {
 
         // funciones()
 
-        classes()
+        // classes()
+
+        // enumClasses()
+
+        // nestedAndInnerClasses()
+
+        classInheritance()
     }
 
     // Comentario en Linea
@@ -666,6 +672,8 @@ class MainActivity : AppCompatActivity() {
          * Conocida tambien como objeto.
          * Es una contrusccion flexible, de uso general, para definir nuevos tipos.
          * Pueden contener en su interior propiedades y metodos, y Funciones
+         *
+         * Usaremos la clase: Programmer
          */
 
         // Llamamos a la clase programmer pasandole parametros
@@ -681,5 +689,105 @@ class MainActivity : AppCompatActivity() {
         val itai = Programmer("Itai",25, arrayOf(Programmer.Language.JAVA), arrayOf(mk))
         itai.code() // -> Estoy programando en JAVA
         println("${itai.friends?.first()?.name} es amigo de ${itai.name}") // -> Minka es amigo de Itai
+    }
+
+    // -------------------------------------------------------------------------
+
+    enum class Direccion(val dir: Int) {
+        NORTH(1), SOUTH(-1), EAST(1), WEST(-1);
+
+        fun descripcion(): String {
+//            if (this == NORTH) {
+//                return "La direccion es norte"
+//            }
+
+            return when (this) {    // el when debe abarcar todos los valores, para este caso son 4
+                NORTH -> "La direccion es Norte"
+                SOUTH -> "La direccion es Sur"
+                EAST -> "La direccion es Este"
+                WEST -> "La direccion es Oeste"
+            }
+        }
+    }
+
+
+    private fun enumClasses() {
+
+        /**
+         * 14 - ENUM
+         *
+         * El uso mas principal de las clases de enumeracion es implementar
+         * enumeracion type-safe (con seguridad de tipos)
+         * Siempre debe estar el 'enum class' antes de las funciones
+         */
+
+        var userDireccion: Direccion? = null
+        println("Direccion: $userDireccion")  // -> Direccion: Null
+
+        userDireccion = Direccion.NORTH
+        println("Direccion: $userDireccion")  // -> Direccion: NORTH
+
+        userDireccion = Direccion.EAST
+        println("Direccion: $userDireccion")  // -> Direccion: EAST
+
+        // Propiedades por defecto
+        println("Propiedad name: ${userDireccion.name}")    // -> EAST
+        println("Propiedad ordinal: ${userDireccion.ordinal}")    // -> 2
+
+        // Funciones
+        println(userDireccion.descripcion())    // -> La direccion es Este
+
+        // Inicializacion
+        println(userDireccion.dir)  // -> 1
+
+    }
+
+
+    private fun nestedAndInnerClasses() {
+
+        /**
+         * 15 - CLASES ANIDADAS
+         *
+         * Una clase puede contener clases dentro de ella
+         * Nos sirven para que sea mas seguro, eficiente, estructurado
+         *
+         * Usaremos las clases: MyNestedAndInnerClass.kt
+         */
+
+        // Clase anidada (mested)
+        val myNestedClass = MyNestedAndInnerClass.MyNestedClass()
+        val sum = myNestedClass.sum(10,5)
+        println("El resultado de la suma es: $sum") // -> El resultado de la suma es: 15
+
+        // Clase interna (inner)
+        val myInnerClass = MyNestedAndInnerClass().MyInnerClass()
+        val sumTwo = myInnerClass.sumTwo(10)
+        println("El resultado de la 2da suma es: $sumTwo") // -> El resultado de la 2da suma es: 12    }
+
+    }
+
+
+    private fun classInheritance() {
+
+        /**
+         * 16 - HERENCIA
+         *
+         * La herencia es un mecanismo de los lenguajes de POO basados en clases
+         * por medio del cual una clase se deriva de ora de manera que
+         * extiende su funcionalidad o la especializa
+         *
+         * Usaremos las clases: Work.kt - Person.kt - Developer.kt - Vehiculo.kt - Designer.kt
+         */
+
+        val person = Person("MK",20)
+
+        val developer = Developer("Minka", 24,"Java")
+        developer.work()    // -> Esta persona esta desarrollando y programando
+        developer.sayLanguage() // -> Este desarrrollador usa el lenguaje Java
+        developer.goToWork()    // -> Esta persona va  a estudiar
+        developer.drive()       // -> Esta persona conduce un coche
+
+        val designer = Designer("Itai", 26)
+        designer.work()     // -> Esta persona esta diseñando
     }
 }
