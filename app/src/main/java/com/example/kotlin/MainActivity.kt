@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         // nestedAndInnerClasses()
 
-        classInheritance()
+        // classInheritance()
     }
 
     // Comentario en Linea
@@ -790,4 +790,7 @@ class MainActivity : AppCompatActivity() {
         val designer = Designer("Itai", 26)
         designer.work()     // -> Esta persona esta diseñando
     }
+
+
+
 }
