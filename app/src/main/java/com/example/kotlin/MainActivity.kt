@@ -22,7 +22,11 @@ class MainActivity : AppCompatActivity() {
 
         // loops()
 
-        nullSafety()
+        // nullSafety()
+
+        // funciones()
+
+        classes()
     }
 
     // Comentario en Linea
@@ -562,7 +566,7 @@ class MainActivity : AppCompatActivity() {
     private fun nullSafety() {
 
         /**
-         * 11vo - NULL SAFETY
+         * 11 - NULL SAFETY
          *
          * Seguridad contra nulos
          */
@@ -601,5 +605,81 @@ class MainActivity : AppCompatActivity() {
             // <- Se ejecuta cuando es nulo ->
             println(mySafetyString)
         }
+    }
+
+
+    fun funciones() {
+
+        /**
+         * 12 - FUNCIONES
+         *
+         * Nos permite reutilizar el codigo
+         * Realiza una tarea muy concreta
+         * No puede exister 2 funciones con el mismo nombre y parametros de entrada
+         */
+
+        // Queremos decir 3 veces Hola
+        sayHello()  // -> Hola
+        sayHello()  // -> Hola
+        sayHello()  // -> Hola
+
+        sayMyName("Minka")  // -> Hola, mi nombre es Minka
+        sayMyName("July")  // -> Hola, mi nombre es July
+
+        sayMyNameAndAge("Minka", 24)
+
+        val resultado = sumTwoNumbers(5, 10)
+        println(resultado)  // -> 15
+
+        println(sumTwoNumbers(5, 10))   // -> 15
+
+        println(sumTwoNumbers(5, sumTwoNumbers(5, 10))) // -> 20
+    }
+
+    // Funcion Simple
+    fun sayHello(){
+        println("Hola")
+    }
+
+    // Funciones con un parametro de entrada
+    fun sayMyName(name: String){
+        println("Hola, mi nombre es $name")
+    }
+
+    // Funciones con un parametro de entrada
+    fun sayMyNameAndAge(name: String, age: Int){
+        println("Hola, mi nombre es $name y mi edad es $age")
+    }
+
+    // Funcion con un valor de retorno (retorna un entero - Int)
+    fun sumTwoNumbers(firstNumber: Int, secondNumber: Int) : Int{
+        val sum = firstNumber + secondNumber
+        return sum
+    }
+
+
+    fun classes(){
+
+        /**
+         * 13 - CLASES
+         *
+         * Conocida tambien como objeto.
+         * Es una contrusccion flexible, de uso general, para definir nuevos tipos.
+         * Pueden contener en su interior propiedades y metodos, y Funciones
+         */
+
+        // Llamamos a la clase programmer pasandole parametros
+        val mk = Programmer("Minka",24, arrayOf(Programmer.Language.KOTLIN, Programmer.Language.SWIFT))
+
+        println(mk.name)    // -> Minka
+        mk.age = 18
+
+        // Invocamos la funcion de la clase
+        mk.code()   // -> Estoy programando en KOTLIN
+                    // -> Estoy programando en SWIFT
+
+        val itai = Programmer("Itai",25, arrayOf(Programmer.Language.JAVA), arrayOf(mk))
+        itai.code() // -> Estoy programando en JAVA
+        println("${itai.friends?.first()?.name} es amigo de ${itai.name}") // -> Minka es amigo de Itai
     }
 }
