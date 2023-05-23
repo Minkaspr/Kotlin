@@ -2,6 +2,11 @@ package com.example.kotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import java.util.*
+import kotlin.collections.ArrayList
+
+typealias MyMapList = MutableMap<Int, ArrayList<String>>
+typealias MyFun = (Int, String, MyMapList) -> Boolean
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +38,20 @@ class MainActivity : AppCompatActivity() {
         // nestedAndInnerClasses()
 
         // classInheritance()
+
+        // interfaces()
+
+        // visibilityModifiers()
+
+        // dataClasses()
+
+        // typeAliases()
+
+        // destructuringDeclarations()
+
+        // extensions()
+
+         lambda()
     }
 
     // Comentario en Linea
@@ -776,7 +795,8 @@ class MainActivity : AppCompatActivity() {
          * por medio del cual una clase se deriva de ora de manera que
          * extiende su funcionalidad o la especializa
          *
-         * Usaremos las clases: Work.kt - Person.kt - Developer.kt - Vehiculo.kt - Designer.kt
+         * Usaremos las clases: Work.kt - Person.kt - Developer.kt - Designer.kt
+         * Interface: Vehiculo.kt
          */
 
         val person = Person("MK",20)
@@ -792,5 +812,190 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun interfaces() {
 
+        /**
+         * 17 - INTERFACES
+         *
+         * Pueden contener declaraciones abstractas o implementaciones de funciones o propiedades
+         * La diferencia con las clases abstractas es que las interfaces nunca
+         * pueden almacenar estado.
+         *
+         * Usaremos la interface: Game.kt
+         * Clase: Person.kt
+         */
+
+        val gamer = Person("Minka",24)
+        gamer.play()    //-> Esta persona esta jugando Among Us
+        gamer.stream()  //-> Estoy haciendo stream de mi juego Among Us
+    }
+
+
+    private fun visibilityModifiers() {
+
+        /**
+         * 18 - MODIFICADORES DE VISIBILIDAD
+         *
+         * Las clases, objetos, interfaces, constructores, funciones y propiedades
+         * y accesos get/set pueden tener modificadores de visibilidad
+         *
+         * Tenemos 4:
+         *  Private - Protected - Internal - Public
+         *
+         *  Usaremos las clases: Visibility.kt
+         */
+
+        // La clase es privada, si fuese publica podriamos acceder
+        /*
+        val visibility = Visibility()
+        visibility.sayName()        // -> No tengo nombre
+        visibility.name = "Minka"
+        visibility.sayName()        // -> Mi nombre es Minka
+        */
+
+    }
+
+
+    private fun dataClasses() {
+
+        /**
+         * 19 - DATA CLASSES
+         *
+         * Son unicamente para almacenar datos
+         *
+         * Data class: Worker.kt
+         *
+         */
+
+        val mk = Worker("Minka",24,"Desarrollador")
+        mk.lastWord = "Musico"
+
+        val it = Worker("Itai")
+
+        // equals & hashCode - Comparar objetos
+        if (mk.equals(it)) {
+            println("Son iguales")
+        } else {
+            println("No son iguales")   // -> No son iguales
+        }
+
+        val min = Worker("Minka",24,"Desarrollador")
+        min.lastWord = "Musico"
+        if (mk == it) {
+            println("Son iguales")      // -> Son iguales
+        } else {
+            println("No son iguales")
+        }
+
+        // toString
+        println(mk.toString())  // -> Worker(name=Minka, age=24, work=Desarrollador)
+
+        // copy
+        val mk2 = mk.copy(age=25)
+        println(mk.toString())  // -> Worker(name=Minka, age=24, work=Desarrollador)
+        println(mk2.toString()) // -> Worker(name=Minka, age=25, work=Desarrollador)
+
+        // componentN
+        val(name,age) = mk
+        println(name)   // -> Minka
+        println(age)    // -> 24
+    }
+
+    var myMap: MyMapList = mutableMapOf()
+    private fun typeAliases() {
+
+        /**
+         * 20 - TYPE ALIASES
+         */
+        var myNewMap: MyMapList = mutableMapOf()
+        myNewMap[1] = arrayListOf("Minka","mk")
+        myNewMap[2] = arrayListOf("Abcdef","ab")
+        myMap= myNewMap
+    }
+
+
+    private fun destructuringDeclarations() {
+
+        /**
+         * 21 - DESTRUCTURING DECLARATIONS
+         *
+         * Estructurar en varios fragmentos
+         *
+         * Data Class: Worker.kt
+         */
+
+        val (name, _ , work) = Worker("Minka",24,"Desarrollador")
+        println("$name, $work")   // -> Minka, Desarrollador
+
+        val mk =  Worker("Minka",24,"Desarrollador")
+        println(mk.component1())    // -> Minka
+
+        val (nameW, ageW) = myWorker()
+        println("$nameW, $ageW")    // -> Minka, 24
+
+        val myMap = mapOf(1 to "Minka",2 to "Brisa", 3 to "Magui")
+        for ((id,name) in myMap) {
+            println("$id, $name")
+        }
+        // -> 1, Minka
+        // -> 2, Brisa
+        // -> 3, Magui
+    }
+
+    fun myWorker(): Worker{
+        return Worker("Minka",24,"Desarrollador")
+    }
+
+    fun extensions(){
+
+        /**
+         * 22 - EXTENSIONS
+         *
+         * Nuevas funciones de librerias de terceros
+         *
+         * File: Extensions.kt
+         */
+        val myDate = Date()
+        println(myDate.customFormat())
+        println(myDate.formatSize)
+
+        var myDateNullable: Date? = null
+
+        println(myDateNullable.customFormat())
+    }
+
+
+    private fun lambda() {
+
+        /**
+         * 23 - LAMBDA
+         *
+         * Nos permite trabajar una funcion de orden superior con otras funciones
+         */
+
+        var myIntList = arrayListOf(1,2,3,4,5,6,7,8,9,10)
+
+        var myFilterIntList = myIntList.filter{ myInt ->
+
+            println(myInt)
+            if (myInt == 1) {
+                return@filter true
+            }
+            myInt > 5
+        }
+
+        println(myFilterIntList)    // -> [1,6,7,8,9,10]
+
+        val mySumFun = fun (x: Int, y: Int): Int = x + y
+        val myMulFun = fun (x: Int, y: Int): Int = x * y
+
+        println(myOperateFun(5,10,mySumFun))    // -> 15
+        println(myOperateFun(5,10,myMulFun))    // -> 50
+
+        println(myOperateFun(5,10){ x, y -> x-y})   // -> -5
+    }
+
+    private fun myOperateFun (x: Int, y: Int, myFun: (Int, Int) -> Int) :Int {
+        return myFun(x,y)
+    }
 }
